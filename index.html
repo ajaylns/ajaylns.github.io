@@ -1,6 +1,1609 @@
-<html>
-<header><title>This is title</title></header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajay Prasad | Senior Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --rose: #f43f5e;
+            --emerald: #10b981;
+            --violet: #8b5cf6;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+        }
+        .bg-animation::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
+
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--gray); text-decoration: none; font-weight: 500; font-size: 0.9rem;
+            transition: color 0.3s; position: relative;
+        }
+        .nav-links a:hover { color: var(--light); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 8rem 5% 4rem; position: relative;
+        }
+        .hero-content { text-align: center; max-width: 900px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1.2rem; background: var(--glass);
+            border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 50px;
+            font-size: 0.85rem; color: var(--primary); margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem; color: var(--gray); margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s both; line-height: 1.7;
+        }
+        .hero-contact {
+            display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        .hero-contact a {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem; background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            color: var(--light); text-decoration: none; font-weight: 500; transition: all 0.3s;
+        }
+        .hero-contact a:hover {
+            background: rgba(99, 102, 241, 0.2); border-color: var(--primary); transform: translateY(-2px);
+        }
+        .social-links {
+            display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+        .social-links a {
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            color: var(--gray); font-size: 1.2rem; transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary); color: white; transform: translateY(-3px); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section { padding: 5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .section-header p { color: var(--gray); font-size: 1.1rem; }
+        .section-line {
+            width: 60px; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 1rem auto 0; border-radius: 2px;
+        }
+
+        /* CSS Illustration Cards */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+        .exp-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative;
+        }
+        .exp-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary)); opacity: 0; transition: opacity 0.3s;
+        }
+        .exp-card:hover {
+            transform: translateY(-8px); border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.15);
+        }
+        .exp-card:hover::before { opacity: 1; }
+        .exp-illustration {
+            width: 100%; height: 180px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .exp-illustration i {
+            font-size: 4rem; z-index: 2; position: relative;
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
+        }
+        .exp-illustration .pattern {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.15;
+        }
+        .exp-illustration .pattern::before,
+        .exp-illustration .pattern::after {
+            content: ''; position: absolute; border-radius: 50%;
+        }
+        /* Gradient backgrounds for illustrations */
+        .grad-1 { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); }
+        .grad-2 { background: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%); }
+        .grad-3 { background: linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%); }
+        .grad-4 { background: linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #c2410c 100%); }
+        .grad-5 { background: linear-gradient(135deg, #831843 0%, #9d174d 50%, #be185d 100%); }
+        .grad-6 { background: linear-gradient(135deg, #3f6212 0%, #4d7c0f 50%, #65a30d 100%); }
+        .grad-7 { background: linear-gradient(135deg, #581c87 0%, #6b21a8 50%, #7e22ce 100%); }
+        .grad-8 { background: linear-gradient(135deg, #134e4a 0%, #115e59 50%, #0f766e 100%); }
+        .grad-9 { background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #3730a3 100%); }
+        .grad-10 { background: linear-gradient(135deg, #713f12 0%, #a16207 50%, #ca8a04 100%); }
+        .grad-11 { background: linear-gradient(135deg, #3f3f46 0%, #52525b 50%, #71717a 100%); }
+        .grad-12 { background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%); }
+
+        .exp-content { padding: 1.5rem; }
+        .exp-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 0.6rem; flex-wrap: wrap; gap: 0.5rem;
+        }
+        .exp-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--light); }
+        .exp-company {
+            font-size: 0.8rem; color: var(--primary); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .exp-date {
+            font-size: 0.75rem; color: var(--gray); background: rgba(255,255,255,0.05);
+            padding: 0.25rem 0.7rem; border-radius: 20px; white-space: nowrap;
+        }
+        .exp-location {
+            font-size: 0.78rem; color: var(--gray); margin-bottom: 0.8rem;
+            display: flex; align-items: center; gap: 0.3rem;
+        }
+        .exp-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.65; }
+        .exp-desc ul { list-style: none; padding: 0; }
+        .exp-desc li { position: relative; padding-left: 1.1rem; margin-bottom: 0.4rem; }
+        .exp-desc li::before { content: '▸'; position: absolute; left: 0; color: var(--primary); }
+        .exp-tags {
+            display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem;
+        }
+        .exp-tag {
+            font-size: 0.72rem; padding: 0.25rem 0.7rem;
+            background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px; color: var(--primary); font-weight: 500;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative;
+            display: flex; flex-direction: column;
+        }
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent)); opacity: 0; transition: opacity 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-6px); border-color: rgba(6, 182, 212, 0.3);
+            box-shadow: 0 20px 40px -12px rgba(6, 182, 212, 0.15);
+        }
+        .project-card:hover::before { opacity: 1; }
+        .project-illustration {
+            width: 100%; height: 170px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .project-illustration i {
+            font-size: 3.5rem; z-index: 2; position: relative;
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.3));
+        }
+        .project-illustration .pattern {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.12;
+        }
+        .project-illustration .pattern::before,
+        .project-illustration .pattern::after {
+            content: ''; position: absolute; border-radius: 50%;
+        }
+        .project-content { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; gap: 0.5rem; }
+        .project-title { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--light); line-height: 1.3; }
+        .project-org { font-size: 0.8rem; color: var(--secondary); font-weight: 600; margin-bottom: 0.4rem; }
+        .project-date { font-size: 0.75rem; color: var(--gray); background: rgba(255,255,255,0.05); padding: 0.2rem 0.6rem; border-radius: 20px; white-space: nowrap; }
+        .project-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; flex: 1; }
+        .project-desc ul { list-style: none; padding: 0; }
+        .project-desc li { position: relative; padding-left: 1rem; margin-bottom: 0.3rem; }
+        .project-desc li::before { content: '•'; position: absolute; left: 0; color: var(--secondary); }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .project-tag {
+            font-size: 0.7rem; padding: 0.25rem 0.7rem;
+            background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 20px; color: var(--secondary); font-weight: 500;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .skill-category {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px; padding: 1.8rem; transition: all 0.3s;
+        }
+        .skill-category:hover { border-color: rgba(99, 102, 241, 0.2); transform: translateY(-4px); }
+        .skill-category h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .skill-category h3 i { color: var(--primary); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .skill-tag {
+            padding: 0.4rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;
+            font-size: 0.85rem; color: var(--light); transition: all 0.3s;
+        }
+        .skill-tag:hover { background: var(--primary); color: white; transform: scale(1.05); }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .edu-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s;
+        }
+        .edu-card:hover { border-color: rgba(6, 182, 212, 0.3); transform: translateY(-4px); }
+        .edu-card::after {
+            content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+        }
+        .edu-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; margin-bottom: 1rem;
+        }
+        .edu-school { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .edu-degree { color: var(--gray); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .edu-date { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+
+        .cert-card {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            padding: 1rem 1.5rem; background: var(--card-bg);
+            border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 12px;
+            margin: 0.5rem; transition: all 0.3s;
+        }
+        .cert-card:hover { background: rgba(245, 158, 11, 0.1); transform: translateY(-2px); }
+        .cert-card i { color: var(--accent); font-size: 1.2rem; }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .lang-card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px; padding: 1.2rem 1.5rem;
+            display: flex; align-items: center; gap: 1rem;
+            transition: all 0.3s;
+        }
+        .lang-card:hover { border-color: rgba(99, 102, 241, 0.2); transform: translateY(-3px); }
+        .lang-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
+        }
+        .lang-icon.native { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+        .lang-icon.prof { background: rgba(99, 102, 241, 0.15); color: var(--primary); }
+        .lang-icon.lim { background: rgba(245, 158, 11, 0.15); color: var(--accent); }
+        .lang-name { font-weight: 600; font-size: 0.95rem; }
+        .lang-level { font-size: 0.75rem; color: var(--gray); }
+
+        .summary-box {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px; padding: 2.5rem;
+            max-width: 900px; margin: 0 auto;
+            position: relative; overflow: hidden;
+        }
+        .summary-box::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+        .summary-box ul { list-style: none; padding: 0; }
+        .summary-box li {
+            position: relative; padding-left: 1.5rem; margin-bottom: 0.7rem;
+            color: var(--gray); font-size: 0.95rem; line-height: 1.7;
+        }
+        .summary-box li::before {
+            content: '▸'; position: absolute; left: 0; color: var(--primary); font-weight: bold;
+        }
+
+        footer {
+            text-align: center; padding: 3rem 5%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--gray); font-size: 0.9rem;
+        }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .particle {
+            position: fixed; width: 4px; height: 4px;
+            background: var(--primary); border-radius: 50%;
+            opacity: 0.3; pointer-events: none; animation: float 15s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-50px) translateX(-50px); }
+            75% { transform: translateY(-150px) translateX(30px); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .experience-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 3rem 5%; }
+            .lang-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
-Hello world
+    <div class="bg-animation"></div>
+    <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="top: 60%; left: 80%; animation-delay: 3s;"></div>
+    <div class="particle" style="top: 40%; left: 50%; animation-delay: 6s;"></div>
+    <div class="particle" style="top: 80%; left: 20%; animation-delay: 9s;"></div>
+    <div class="particle" style="top: 10%; left: 70%; animation-delay: 12s;"></div>
+
+    <nav>
+        <div class="logo">AP.</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#languages">Languages</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-code"></i>
+                Full Stack Developer | Cloud Engineer | AI Practitioner | IoT Enthusiast
+            </div>
+            <h1>Hi, I'm <span>Ajay Prasad</span></h1>
+            <p class="hero-subtitle">
+                9+ years building scalable systems, microservices & cloud-native solutions across Singapore, Kenya & beyond.
+                From embedded aerospace systems to SaaS security platforms — I craft backends, APIs, and infrastructure that powers real-world products.
+            </p>
+            <div class="hero-contact">
+                <a href="mailto:ajaylns2008@yahoo.com">
+                    <i class="fas fa-envelope"></i>
+                    ajaylns2008@yahoo.com
+                </a>
+                <a href="tel:+6594493437">
+                    <i class="fas fa-phone"></i>
+                    +65 9449 3437
+                </a>
+                <a href="tel:+254758206440">
+                    <i class="fas fa-phone"></i>
+                    +254 758 206 440
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/deepinbytes" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://github.com/ajaylns" target="_blank" title="GitHub (Alt)">
+                    <i class="fab fa-github-alt"></i>
+                </a>
+                <a href="https://linkedin.com/in/ajaylns" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header reveal">
+            <h2>About Me</h2>
+            <p>A snapshot of what I bring to the table</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="summary-box reveal">
+            <ul>
+                <li>Proficient in end-to-end development of products from requirement analysis to system study, designing, coding, testing, documentation and implementation</li>
+                <li>Hands-on experience in Python, Golang, J2EE, Android, Node.js, PHP and C# development</li>
+                <li>Wide experience in analyzing and documenting business requirements, functional and non-functional specifications</li>
+                <li>Good knowledge in Network Security, Penetration Testing and Forensics</li>
+                <li>Experienced working in both corporate and startup environments</li>
+                <li>Possesses a customer-centric and systems/product-driven approach to designing solutions</li>
+                <li>Comfortable interacting with people across hierarchical levels for smooth project execution</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header reveal">
+            <h2>Experience</h2>
+            <p>12 roles across startups, enterprises, and academia</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="experience-grid">
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-1">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-building" style="color: #a5b4fc;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Senior Software Consultant</div>
+                            <div class="exp-company">Truuue — Real Estate Transaction Platform</div>
+                        </div>
+                        <span class="exp-date">Dec 2022 - Jan 2026</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (3 years 2 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Provided end-of-life maintenance and operational support during product wind-down</li>
+                            <li>Ensured platform stability through scheduled system check-ins, infrastructure monitoring, and targeted bug fixes</li>
+                            <li>Delivered lightweight enhancements and hot patches to keep critical services secure</li>
+                            <li>Maintained and optimized CI/CD pipelines, containerized legacy services, and streamlined cloud resources</li>
+                            <li>Oversaw DevOps health checks, job monitoring, and service uptime with minimal disruption</li>
+                            <li>Created decommissioning plans to support smooth product sunsetting and knowledge transfer</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Django</span>
+                        <span class="exp-tag">ReactJS</span>
+                        <span class="exp-tag">AWS & GCP</span>
+                        <span class="exp-tag">Postgres</span>
+                        <span class="exp-tag">Golang</span>
+                        <span class="exp-tag">Python</span>
+                        <span class="exp-tag">MQ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-2">
+                    <div class="pattern" style="background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-truck" style="color: #7dd3fc;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Senior Software Engineer</div>
+                            <div class="exp-company">Toyota Tsusho Mobility Informatics</div>
+                        </div>
+                        <span class="exp-date">Nov 2021 - Nov 2022</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (1 year 1 month)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Developed the mobile backend (Go) for a proprietary transportation platform</li>
+                            <li>Worked on enhancements to the web backend for fleet management platform — Fleemo</li>
+                            <li>Involved in preparation of tech architecture and design</li>
+                            <li>Developed gRPC and REST-based APIs using customized microservices architecture</li>
+                            <li>Integrated with many complex third-party APIs</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Go</span>
+                        <span class="exp-tag">gRPC</span>
+                        <span class="exp-tag">REST APIs</span>
+                        <span class="exp-tag">Microservices</span>
+                        <span class="exp-tag">Fleet Management</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-3">
+                    <div class="pattern" style="background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-chart-line" style="color: #86efac;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Senior Software Engineer | Technical Lead</div>
+                            <div class="exp-company">Truuue — Real Estate Transaction Platform</div>
+                        </div>
+                        <span class="exp-date">Nov 2019 - Nov 2021</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (2 years 1 month)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Developing and maintaining the suite of proptech products</li>
+                            <li>Developed automation scripts, third-party data scrapers, and crawlers</li>
+                            <li>Worked on UI enhancements — mobile and web</li>
+                            <li>Optimized the platform's real-time bidding system</li>
+                            <li>Involved in preparation of tech architecture and cost estimation for tenders</li>
+                            <li>Set up CI/CD pipelines and dockerized legacy projects</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Django</span>
+                        <span class="exp-tag">ReactJS</span>
+                        <span class="exp-tag">AWS & GCP</span>
+                        <span class="exp-tag">Postgres</span>
+                        <span class="exp-tag">Golang</span>
+                        <span class="exp-tag">Python</span>
+                        <span class="exp-tag">MQ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-4">
+                    <div class="pattern" style="background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-shield-halved" style="color: #fdba74;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Cyber Security Software Engineer</div>
+                            <div class="exp-company">Horangi</div>
+                        </div>
+                        <span class="exp-date">Jan 2018 - Oct 2019</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (1 year 10 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Built SaaS security analysis platform and an endpoint security monitoring product</li>
+                            <li>Worked on building serverless app and cloud infrastructure on AWS</li>
+                            <li>Designed and implemented RESTful APIs and GraphQL APIs</li>
+                            <li>Rewrote Django monolith app to Serverless SaaS platform (microservices) on AWS</li>
+                            <li>Created automated CI/CD pipelines using AWS CodePipeline, TravisCI, Appveyor</li>
+                            <li>Developed endpoint threat monitoring tool on Go</li>
+                            <li>Worked on enhancements to the user portal built on ReactJS</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Python</span>
+                        <span class="exp-tag">Golang</span>
+                        <span class="exp-tag">ReactJS</span>
+                        <span class="exp-tag">Postgres</span>
+                        <span class="exp-tag">AWS Serverless</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-5">
+                    <div class="pattern" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-heart-pulse" style="color: #fda4af;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Senior Software Engineer</div>
+                            <div class="exp-company">Blue Oak Healthcare</div>
+                        </div>
+                        <span class="exp-date">Jul 2017 - Dec 2017</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (6 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Responsible for product's end-to-end mobile application development using React Native and Django</li>
+                            <li>Maintenance of legacy products built using microservice architecture — Docker, Ansible, Pyramid framework</li>
+                            <li>Design prototyping</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">React Native</span>
+                        <span class="exp-tag">Django</span>
+                        <span class="exp-tag">Docker</span>
+                        <span class="exp-tag">Ansible</span>
+                        <span class="exp-tag">Microservices</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-6">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-martini-glass-citrus" style="color: #bef264;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Technical Lead</div>
+                            <div class="exp-company">WOOFR Asia Pacific</div>
+                        </div>
+                        <span class="exp-date">Nov 2016 - Jul 2017</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (9 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Responsible for product's end-to-end mobile (Android/iPhone) and web application development (PHP)</li>
+                            <li>Provided leadership and direction for the offshore and in-house development team</li>
+                            <li>Backend development on Node.js</li>
+                            <li>Project management, QA and recruitment</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">PHP</span>
+                        <span class="exp-tag">Node.js</span>
+                        <span class="exp-tag">Android</span>
+                        <span class="exp-tag">iOS</span>
+                        <span class="exp-tag">Team Leadership</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-7">
+                    <div class="pattern" style="background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-arrow-trend-up" style="color: #d8b4fe;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Software Engineer</div>
+                            <div class="exp-company">Spiking.com</div>
+                        </div>
+                        <span class="exp-date">Aug 2016 - Nov 2016</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (4 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Worked on Android (Kotlin) and iOS (Swift) application development</li>
+                            <li>Developed backend on Node.js</li>
+                            <li>Set up server infrastructure on AWS and Jenkins CI for the product</li>
+                            <li>Managing offshore development team</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Kotlin</span>
+                        <span class="exp-tag">Swift</span>
+                        <span class="exp-tag">Node.js</span>
+                        <span class="exp-tag">AWS</span>
+                        <span class="exp-tag">Jenkins CI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-8">
+                    <div class="pattern" style="background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-users" style="color: #5eead4;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Software Engineer</div>
+                            <div class="exp-company">Excelforte</div>
+                        </div>
+                        <span class="exp-date">Aug 2015 - Apr 2016</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (9 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Designed and developed a lightweight CRM web application</li>
+                            <li>Developed the application frontend and backend</li>
+                            <li>Used Telerik Kendo UI Controls, ASP.NET MVC 5, WCF and Microsoft Entity Framework</li>
+                            <li>Service-oriented architecture (SOA) using REST services</li>
+                            <li>Led in-house technical team</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">ASP.NET MVC</span>
+                        <span class="exp-tag">C#</span>
+                        <span class="exp-tag">WCF</span>
+                        <span class="exp-tag">Entity Framework</span>
+                        <span class="exp-tag">REST</span>
+                        <span class="exp-tag">SQL Server</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-9">
+                    <div class="pattern" style="background: radial-gradient(circle at 60% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-flask" style="color: #93c5fd;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Graduate Student Researcher (PT)</div>
+                            <div class="exp-company">National University of Singapore</div>
+                        </div>
+                        <span class="exp-date">Mar 2015 - Oct 2015</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (8 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Designed and developed a customized Android application to aid doctors and patients end-to-end for a top hospital</li>
+                            <li>Worked on Agile methodology</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Android</span>
+                        <span class="exp-tag">Agile</span>
+                        <span class="exp-tag">Healthcare</span>
+                        <span class="exp-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-10">
+                    <div class="pattern" style="background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-credit-card" style="color: #fde047;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Software Engineer</div>
+                            <div class="exp-company">NUMONI Pte Ltd</div>
+                        </div>
+                        <span class="exp-date">Apr 2015 - Aug 2015</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Singapore (5 months)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Responsible for product's frontend development on Android</li>
+                            <li>Provided support to the applications engineering team</li>
+                            <li>Worked on NUGEN Self Service Payment kiosk</li>
+                            <li>Developed modules for factory application</li>
+                            <li>Gained knowledge in payments domain</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Android</span>
+                        <span class="exp-tag">Kiosk</span>
+                        <span class="exp-tag">Payments</span>
+                        <span class="exp-tag">Factory Modules</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-11">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-laptop-code" style="color: #d4d4d8;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Freelance Web Developer</div>
+                            <div class="exp-company">Freelancer.com</div>
+                        </div>
+                        <span class="exp-date">Jan 2014 - Dec 2014</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Remote (1 year)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Delivered web development projects for diverse clients through the Freelancer.com platform</li>
+                            <li>Handled end-to-end project lifecycle from requirements to deployment</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Web Development</span>
+                        <span class="exp-tag">Client Management</span>
+                        <span class="exp-tag">Full Stack</span>
+                    </div>
+                </div>
+            </div>
+            <div class="exp-card reveal">
+                <div class="exp-illustration grad-12">
+                    <div class="pattern" style="background: radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-microchip" style="color: #94a3b8;"></i>
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-title">Software Engineer</div>
+                            <div class="exp-company">HCL Technologies Ltd</div>
+                        </div>
+                        <span class="exp-date">Jan 2011 - Dec 2013</span>
+                    </div>
+                    <div class="exp-location"><i class="fas fa-map-marker-alt"></i> Chennai, India (3 years)</div>
+                    <div class="exp-desc">
+                        <ul>
+                            <li>Worked as Application & Embedded Systems Developer</li>
+                            <li>Gained experience in C#/C++ and J2EE stack</li>
+                            <li>Developed application for handling encrypted firmware updates and log analyzer of Renesas microcontrollers</li>
+                            <li>Developed I2C & RTC proprietary device drivers for Renesas microcontrollers</li>
+                            <li>Worked on RSA's Self Service Portal</li>
+                            <li>Worked on In-Flight Entertainment System for Rockwell Collins</li>
+                            <li>Developed POC of Modbus master application for ABB's new MNS system</li>
+                            <li>Gained experience in Project Management, QA, Testing, and domains: Aerospace | Automotive | Security | Embedded</li>
+                        </ul>
+                    </div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">Embedded C</span>
+                        <span class="exp-tag">C#</span>
+                        <span class="exp-tag">C++</span>
+                        <span class="exp-tag">J2EE</span>
+                        <span class="exp-tag">Firmware</span>
+                        <span class="exp-tag">Device Drivers</span>
+                        <span class="exp-tag">AUTOSAR</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header reveal">
+            <h2>Projects</h2>
+            <p>18 projects spanning cloud security, mobile apps, embedded systems, and more</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-illustration grad-1">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-cloud" style="color: #a5b4fc;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Virtualization Security in Cloud Computing</div>
+                        <span class="project-date">Apr 2016</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>In-depth analysis of Virtualization, Hypervisor, and their security concerns</li>
+                            <li>Countermeasures for attacks and design recommendations</li>
+                            <li>Demo of blue-pill attack</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Cloud Security</span>
+                        <span class="project-tag">Virtualization</span>
+                        <span class="project-tag">Hypervisor</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-4">
+                    <div class="pattern" style="background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-utensils" style="color: #fdba74;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Cheffle — IT Entrepreneurship Business Plan</div>
+                        <span class="project-date">Feb 2016</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Online Job portal & Networking Site for the restaurant industry</li>
+                            <li>Financial modelling and sales forecast for the business initiative</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Entrepreneurship</span>
+                        <span class="project-tag">Business Plan</span>
+                        <span class="project-tag">Restaurant Tech</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-7">
+                    <div class="pattern" style="background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-radio" style="color: #d8b4fe;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Phoenix Radio Management System</div>
+                        <span class="project-date">Sep 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Web application to manage radio programs, scheduling, broadcasters, presenters</li>
+                            <li>Implemented using JSP and Nocturne open-source framework</li>
+                            <li>Tools: NetBeans, Glassfish Server</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">JSP</span>
+                        <span class="project-tag">Java</span>
+                        <span class="project-tag">Glassfish</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-5">
+                    <div class="pattern" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-pills" style="color: #fda4af;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">SmartPH — Medical Distribution Centre</div>
+                        <span class="project-date">Sep 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Mobile app to manage patient prescriptions and reduce pharmacy waiting times</li>
+                            <li>Self-service medicine distribution with packaging robots and GPS</li>
+                            <li>Doctors can transmit prescriptions electronically to patients</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Healthcare</span>
+                        <span class="project-tag">Mobile App</span>
+                        <span class="project-tag">IoT</span>
+                        <span class="project-tag">GPS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-8">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-address-book" style="color: #5eead4;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">ExcelCRM</div>
+                        <span class="project-date">Aug 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-building"></i> Excelforte</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Lightweight CRM web application using ASP.NET MVC and Telerik Kendo UI</li>
+                            <li>REST services through WCF, connected to SQL Server via Entity Framework</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">ASP.NET MVC</span>
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">SQL Server</span>
+                        <span class="project-tag">WCF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-2">
+                    <div class="pattern" style="background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-graduation-cap" style="color: #7dd3fc;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Course Registration System</div>
+                        <span class="project-date">Mar 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Web-based application to make class registration easier</li>
+                            <li>Built using Microsoft ASP.NET MVC 4.5, Bootstrap, WCF and EF</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">ASP.NET</span>
+                        <span class="project-tag">Bootstrap</span>
+                        <span class="project-tag">WCF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-5">
+                    <div class="pattern" style="background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-user-doctor" style="color: #fda4af;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Ethan</div>
+                        <span class="project-date">Mar 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Android app to assist doctors and patients end-to-end</li>
+                            <li>Features: Consultation, Voice controls via Google API, Smart Search</li>
+                            <li>Collaborative Medical Image annotation</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Android</span>
+                        <span class="project-tag">Google API</span>
+                        <span class="project-tag">Medical Imaging</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-10">
+                    <div class="pattern" style="background: radial-gradient(circle at 60% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-store" style="color: #fde047;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">University Souvenir Store Application</div>
+                        <span class="project-date">Feb 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-university"></i> National University of Singapore</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Point of sales system for automating the university souvenir store</li>
+                            <li>Inventory management, sales reporting, and points management</li>
+                            <li>Implemented using J2EE</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">J2EE</span>
+                        <span class="project-tag">POS</span>
+                        <span class="project-tag">Inventory</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-12">
+                    <div class="pattern" style="background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-network-wired" style="color: #94a3b8;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">MLINK_MMA</div>
+                        <span class="project-date">Jul 2013</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-industry"></i> HCL Technologies Ltd</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Master mode Modbus communication for ABB's new MNS system</li>
+                            <li>M10x-M/UMC100 controller slave devices connected to motors</li>
+                            <li>RS485 / Ethernet interfaces using RTU/TCP protocol</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Modbus</span>
+                        <span class="project-tag">RTU/TCP</span>
+                        <span class="project-tag">Industrial</span>
+                        <span class="project-tag">Embedded</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-11">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-microchip" style="color: #d4d4d8;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Building Blocks — Device Drivers</div>
+                        <span class="project-date">Nov 2012</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-industry"></i> HCL Technologies Ltd</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Device driver development: SPI, I2C and RTC for Renesas V850 & RL78</li>
+                            <li>AUTOSAR-based microcontroller drivers with full feature support</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Embedded C</span>
+                        <span class="project-tag">AUTOSAR</span>
+                        <span class="project-tag">SPI/I2C</span>
+                        <span class="project-tag">Device Drivers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-1">
+                    <div class="pattern" style="background: radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-bug" style="color: #a5b4fc;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Building Blocks — Coredump Analyzer</div>
+                        <span class="project-date">Jul 2012</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-industry"></i> HCL Technologies Ltd</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Debugging component for diagnosing errors in microprocessor applications</li>
+                            <li>Embedded CoreDump component + PC-based analyzer tool</li>
+                            <li>Communication protocol similar to CAN and LIN interface</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Debugging</span>
+                        <span class="project-tag">Embedded</span>
+                        <span class="project-tag">CAN/LIN</span>
+                        <span class="project-tag">Java</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-9">
+                    <div class="pattern" style="background: radial-gradient(circle at 40% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-key" style="color: #93c5fd;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Self Service Portal</div>
+                        <span class="project-date">Jan 2012</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-building"></i> RSA Security</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>RSA Self Service Portal for token registration and replacement</li>
+                            <li>Lightweight admin portal for token management and CRUD operations</li>
+                            <li>Restful server for device information with Ajax integration</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Java</span>
+                        <span class="project-tag">Spring</span>
+                        <span class="project-tag">REST</span>
+                        <span class="project-tag">Oracle DB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-2">
+                    <div class="pattern" style="background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-plane" style="color: #7dd3fc;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Venue Cabin Management System</div>
+                        <span class="project-date">Mar 2011</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-industry"></i> HCL Technologies Ltd / Rockwell Collins</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>In-Flight Entertainment cockpit feature via Flight Deck Controller</li>
+                            <li>ARINC 429 protocol, discrete signal processing</li>
+                            <li>HDAV 6000 MDC audio parameter control for embedded devices</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Aviation</span>
+                        <span class="project-tag">ARINC 429</span>
+                        <span class="project-tag">Embedded</span>
+                        <span class="project-tag">C++</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-4">
+                    <div class="pattern" style="background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-video" style="color: #fdba74;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Wireless Video Surveillance System</div>
+                        <span class="project-date">Sep 2009</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-graduation-cap"></i> Academic Project</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>J2ME video surveillance with background subtraction for motion detection</li>
+                            <li>Sends SMS/MMS alerts with captured snapshots to desired mobile</li>
+                            <li>Ported algorithm from MATLAB to J2ME</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">J2ME</span>
+                        <span class="project-tag">Computer Vision</span>
+                        <span class="project-tag">MATLAB</span>
+                        <span class="project-tag">Mobile</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-3">
+                    <div class="pattern" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-seedling" style="color: #86efac;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">7 Habits</div>
+                        <span class="project-date">Jul 2017</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-heartbeat"></i> Blue Oak Healthcare</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Mobile app to improve lifestyle by tracking diet and habits</li>
+                            <li>Backend built with Django framework</li>
+                            <li>Prototyping on Sketch and InVision</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Django</span>
+                        <span class="project-tag">Mobile</span>
+                        <span class="project-tag">UX Design</span>
+                        <span class="project-tag">Health</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-6">
+                    <div class="pattern" style="background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-glass-cheers" style="color: #bef264;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Woofr</div>
+                        <span class="project-date">Nov 2016</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-glass-cheers"></i> WOOFR Asia Pacific</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Nightlife app for instant bookings, tickets and drinks purchases</li>
+                            <li>Tech Lead providing direction to offshore and onsite teams</li>
+                            <li>PHP + CodeIgniter backend and Android app</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">PHP</span>
+                        <span class="project-tag">CodeIgniter</span>
+                        <span class="project-tag">Android</span>
+                        <span class="project-tag">Tech Lead</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-7">
+                    <div class="pattern" style="background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-chart-line" style="color: #d8b4fe;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Spiking</div>
+                        <span class="project-date">Jul 2016</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-chart-line"></i> Spiking.com</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>FinTech app bringing transparency to stock markets via real-time trade data</li>
+                            <li>Full stack development with NodeJS backend and server infrastructure</li>
+                            <li>Jenkins CI setup and legacy Kotlin app maintenance</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">NodeJS</span>
+                        <span class="project-tag">FinTech</span>
+                        <span class="project-tag">Jenkins CI</span>
+                        <span class="project-tag">Kotlin</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card reveal">
+                <div class="project-illustration grad-10">
+                    <div class="pattern" style="background: radial-gradient(circle at 60% 60%, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+                    <i class="fas fa-money-bill-wave" style="color: #fde047;"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-title">Nugen</div>
+                        <span class="project-date">Apr 2015</span>
+                    </div>
+                    <div class="project-org"><i class="fas fa-credit-card"></i> NUMONI Pte Ltd</div>
+                    <div class="project-desc">
+                        <ul>
+                            <li>Self-service kiosk for payment management operating 24/7</li>
+                            <li>Supports 22 types of currencies and cash acceptance</li>
+                            <li>Android developer for factory and diagnostics modules</li>
+                        </ul>
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Android</span>
+                        <span class="project-tag">Kiosk</span>
+                        <span class="project-tag">Payments</span>
+                        <span class="project-tag">Multi-currency</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header reveal">
+            <h2>Skills & Technologies</h2>
+            <p>Tools and technologies I use to build great products</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-star"></i> Top Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">C++</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Go</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Android</span>
+                    <span class="skill-tag">Swift</span>
+                    <span class="skill-tag">Kotlin</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-globe"></i> Web Frameworks</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">Flask</span>
+                    <span class="skill-tag">ReactJS</span>
+                    <span class="skill-tag">React Native</span>
+                    <span class="skill-tag">AngularJS</span>
+                    <span class="skill-tag">ASP.NET MVC</span>
+                    <span class="skill-tag">JSP/J2EE</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">GraphQL</span>
+                    <span class="skill-tag">gRPC</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">GCP</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Ansible</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">AWS Lambda</span>
+                    <span class="skill-tag">Serverless</span>
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">Jenkins</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-database"></i> Data & Storage</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">NoSQL</span>
+                    <span class="skill-tag">SQL Server</span>
+                    <span class="skill-tag">Oracle DB</span>
+                    <span class="skill-tag">Postgres</span>
+                    <span class="skill-tag">Data Scraping</span>
+                    <span class="skill-tag">Real-time Bidding</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-mobile-alt"></i> Mobile & Platforms</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Android</span>
+                    <span class="skill-tag">iOS</span>
+                    <span class="skill-tag">J2ME</span>
+                    <span class="skill-tag">Windows</span>
+                    <span class="skill-tag">Embedded Systems</span>
+                    <span class="skill-tag">Linux</span>
+                </div>
+            </div>
+            <div class="skill-category reveal">
+                <h3><i class="fas fa-shield-alt"></i> Security & Embedded</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Cybersecurity</span>
+                    <span class="skill-tag">SaaS Security</span>
+                    <span class="skill-tag">Threat Monitoring</span>
+                    <span class="skill-tag">Penetration Testing</span>
+                    <span class="skill-tag">Forensics</span>
+                    <span class="skill-tag">Encrypted Firmware</span>
+                    <span class="skill-tag">Device Drivers</span>
+                    <span class="skill-tag">AUTOSAR</span>
+                    <span class="skill-tag">Modbus</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="languages">
+        <div class="section-header reveal">
+            <h2>Languages</h2>
+            <p>Multilingual communicator across cultures</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="lang-grid reveal">
+            <div class="lang-card">
+                <div class="lang-icon native"><i class="fas fa-comments"></i></div>
+                <div>
+                    <div class="lang-name">Sourashtra</div>
+                    <div class="lang-level">Native or Bilingual</div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-icon native"><i class="fas fa-comments"></i></div>
+                <div>
+                    <div class="lang-name">Tamil</div>
+                    <div class="lang-level">Native or Bilingual</div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-icon prof"><i class="fas fa-comments"></i></div>
+                <div>
+                    <div class="lang-name">English</div>
+                    <div class="lang-level">Full Professional</div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-icon lim"><i class="fas fa-comments"></i></div>
+                <div>
+                    <div class="lang-name">French</div>
+                    <div class="lang-level">Limited Working</div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-icon lim"><i class="fas fa-comments"></i></div>
+                <div>
+                    <div class="lang-name">Hindi</div>
+                    <div class="lang-level">Limited Working</div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div class="lang-icon lim"><i class="fas fa-comments"></i></div>
+                <div>
+                    <div class="lang-name">Thai</div>
+                    <div class="lang-level">Limited Working</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="section-header reveal">
+            <h2>Education</h2>
+            <p>Academic foundation for a career in software engineering</p>
+            <div class="section-line"></div>
+        </div>
+        <div class="education-grid">
+            <div class="edu-card reveal">
+                <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="edu-school">National University of Singapore</div>
+                <div class="edu-degree">Master's Degree, Computer Software Engineering</div>
+                <div class="edu-date"><i class="fas fa-calendar"></i> 2015 - 2016 | Singapore</div>
+            </div>
+            <div class="edu-card reveal">
+                <div class="edu-icon"><i class="fas fa-university"></i></div>
+                <div class="edu-school">Annamalai University</div>
+                <div class="edu-degree">B.E, Computer Science and Engineering</div>
+                <div class="edu-date"><i class="fas fa-calendar"></i> 2006 - 2010 | India</div>
+            </div>
+        </div>
+        <div class="section-header reveal" style="margin-top: 4rem;">
+            <h2>Certifications</h2>
+            <div class="section-line"></div>
+        </div>
+        <div style="text-align: center;" class="reveal">
+            <div class="cert-card">
+                <i class="fas fa-certificate"></i>
+                <span>Red Hat Certified Engineer</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header reveal">
+            <h2>Let's Connect</h2>
+            <p>Interested in working together? Reach out anytime.</p>
+            <div class="section-line"></div>
+        </div>
+        <div style="text-align: center;" class="reveal">
+            <div class="hero-contact" style="justify-content: center;">
+                <a href="mailto:ajaylns2008@yahoo.com">
+                    <i class="fas fa-envelope"></i>
+                    ajaylns2008@yahoo.com
+                </a>
+                <a href="tel:+6594493437">
+                    <i class="fas fa-phone"></i>
+                    +65 9449 3437
+                </a>
+                <a href="tel:+254758206440">
+                    <i class="fas fa-phone"></i>
+                    +254 758 206 440
+                </a>
+            </div>
+            <div class="social-links" style="margin-top: 2rem;">
+                <a href="https://github.com/deepinbytes" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://github.com/ajaylns" target="_blank" title="GitHub (Alt)">
+                    <i class="fab fa-github-alt"></i>
+                </a>
+                <a href="https://linkedin.com/in/ajaylns" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Ajay Prasad. Crafted with <i class="fas fa-heart" style="color: var(--primary);"></i> and clean code.</p>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 100;
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(2, 6, 23, 0.95)';
+            } else {
+                nav.style.background = 'rgba(2, 6, 23, 0.8)';
+            }
+        });
+    </script>
 </body>
 </html>
